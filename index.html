@@ -17,6 +17,8 @@
                     animation: {
                         'fade-in': 'fadeIn 0.5s ease-out forwards',
                         'fade-up': 'fadeUp 0.6s ease-out forwards',
+                        /* Animation for the loader fade-out */
+                        'fadeOut': 'fadeOut 0.5s ease-out forwards',
                     },
                     keyframes: {
                         fadeIn: {
@@ -27,90 +29,39 @@
                             '0%': { opacity: 0, transform: 'translateY(20px)' },
                             '100%': { opacity: 1, transform: 'translateY(0)' },
                         },
+                        /* New animation for the loader fade-out */
+                        fadeOut: {
+                            '0%': { opacity: 1 },
+                            '100%': { opacity: 0 },
+                        },
                     },
                 },
             },
         };
     </script>
     
-    <!-- Custom CSS will be placed here -->
-    <style>
-        /* Custom styles for the splash page and hover cards */
-        
-        /* Gradient background animation */
-        .gradient-bg {
-            background: linear-gradient(-45deg, #10b981, #06b6d4, #3b82f6, #059669);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
+    <!-- Link to your new external CSS file -->
+    <link rel="stylesheet" href="style.css">
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Styling for the feature cards */
-        .feature-card {
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-        }
-        .feature-card:hover {
-            transform: rotateY(180deg);
-        }
-        .card-face {
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* Clip any overflowing content */
-            
-            /* Add flex properties and padding here */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; /* Center horizontally */
-            padding: 1.5rem; /* p-6 */
-            text-align: center;
-        }
-        .card-front {
-            z-index: 2;
-        }
-        .card-back {
-            transform: rotateY(180deg);
-            z-index: 1;
-             word-break: break-word;
-            hyphens: auto;
-        }
-
-        /* Helper for card height */
-        .card-container {
-            perspective: 1000px;
-            min-height: 360px;
-            min-width: 200px; /* Ensure cards have a consistent height */
-        }
-
-        /* Animation delays */
-        .animate-delay-02 { animation-delay: 0.2s; }
-        .animate-delay-04 { animation-delay: 0.4s; }
-        .animate-delay-06 { animation-delay: 0.6s; }
-        .animate-delay-08 { animation-delay: 0.8s; }
-        .animate-delay-10 { animation-delay: 1.0s; }
-        .animate-delay-12 { animation-delay: 1.2s; }
-        .animate-delay-14 { animation-delay: 1.4s; }
-
-    </style>
 </head>
 <body class="font-sans bg-gray-100 text-gray-800">
 
     <!-- 
-      SECTION 1: SPLASH PAGE
-      This is shown by default.
+      SECTION 0: APP LOADER
+      This is shown on load and hides automatically.
     -->
-    <section id="splash" class="min-h-screen gradient-bg text-white flex flex-col justify-center items-center p-4 animate-fade-in">
+    <section id="loader" class="min-h-screen gradient-bg text-white flex flex-col justify-center items-center p-4">
+        <!-- This uses the existing fade-up animation -->
+        <h1 class="text-6xl md:text-8xl font-extrabold mb-4 animate-fade-up">
+            VerdeView
+        </h1>
+    </section>
+
+    <!-- 
+      SECTION 1: SPLASH PAGE
+      This is now hidden by default and shown by the script.
+    -->
+    <section id="splash" class="hidden min-h-screen gradient-bg text-white flex flex-col justify-center items-center p-4">
         <div class="text-center max-w-6xl mx-auto">
             
             <!-- Logo and Tagline -->
@@ -197,281 +148,14 @@
 
     <!-- 
       SECTION 2: MAIN APP / TOOLS
-      This is hidden by default and shown when 'Get Started' is clicked.
+      This section has been REMOVED from index.html
     -->
-    <section id="tools" class="hidden">
-        
-        <!-- App Header (Navigation) -->
-        <header class="bg-white shadow-md sticky top-0 z-50">
-            <nav class="container mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
-                <div class="text-2xl font-bold text-emerald-600">
-                    Verde<span class="text-gray-700">View</span>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <!-- Navigation links for the tools will go here -->
-                    <a href="#analyzer" class="text-gray-600 hover:text-emerald-600 font-medium transition duration-300">Appliance Analyzer</a>
-                    <a href="#planner" class="text-gray-400 cursor-not-allowed" title="Coming Soon">Green Planner (Soon)</a>
-                    <a href="#advisor" class="text-gray-400 cursor-not-allowed" title="Coming Soon">Planting Advisor (Soon)</a>
-                    <a href="#dashboard" class="text-gray-400 cursor-not-allowed" title="Coming Soon">Urban Dashboard (Soon)</a>
-                </div>
-                <div class="md:hidden">
-                    <button class="text-gray-700 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                    </button>
-                </div>
-            </nav>
-        </header>
-
-        <!-- Main Content Area for Tools -->
-        <main class="container mx-auto max-w-7xl p-4 md:p-8">
-            
-            <!-- 
-              TOOL 1: APPLIANCE ANALYZER (Phase 1)
-              This is where we will build the first tool.
-            -->
-            <section id="analyzer" class="py-12">
-                <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Energy-Efficient Appliance Analyzer</h2>
-                    <p class="text-gray-600 mb-6">
-                        Log your appliances to find your energy hogs and see potential savings.
-                    </p>
-                    
-                    <!-- This is the container for the analyzer app -->
-                    <div id="analyzer-app-container">
-                        <!-- We will build the analyzer tool here -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <!-- Input Form --><div>
-                                <h3 class="text-xl font-semibold mb-4">Your Appliances</h3>
-                                <form id="applianceForm" class="space-y-4">
-                                    <div>
-                                        <label for="applianceName" class="block text-sm font-medium text-gray-700">Appliance Name</label>
-                                        <input type="text" id="applianceName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., Refrigerator">
-                                    </div>
-                                    <div>
-                                        <label for="wattage" class="block text-sm font-medium text-gray-700">Wattage (W)</label>
-                                        <input type="number" id="wattage" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 150">
-                                    </div>
-                                    <div>
-                                        <label for="hoursPerDay" class="block text-sm font-medium text-gray-700">Hours Used Per Day</label>
-                                        <input type="number" id="hoursPerDay" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 8">
-                                    </div>
-                                    <div>
-                                        <label for="daysPerWeek" class="block text-sm font-medium text-gray-700">Days Used Per Week</label>
-                                        <input type="number" id="daysPerWeek" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 7">
-                                    </div>
-                                    <button type="submit" class="w-full bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Add Appliance</button>
-                                </form>
-
-                                <div class="mt-6">
-                                    <h3 class="text-xl font-semibold mb-4">Added Appliances</h3>
-                                    <ul id="applianceList" class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                                        <!-- Appliances will be listed here --></ul>
-                                    <button id="calculateTotalBtn" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Calculate Total</button>
-                                </div>
-                            </div>
-
-                            <!-- Results Display --><div>
-                                <h3 class="text-xl font-semibold mb-4">Your Energy Summary</h3>
-                                <div id="results" class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                                    <p class="text-lg mb-2"><strong class="text-gray-700">Total Annual Energy:</strong> <span id="totalEnergy" class="font-bold text-emerald-600">0 kWh</span></p>
-                                    <p class="text-lg mb-2"><strong class="text-gray-700">Estimated Annual Cost:</strong> <span id="totalCost" class="font-bold text-emerald-600">$0.00</span></p>
-                                    <p class="text-lg mb-2"><strong class="text-gray-700">Estimated Annual CO2:</strong> <span id="totalCO2" class="font-bold text-emerald-600">0 kg</span></p>
-                                    
-                                    <div class="mt-6 p-4 bg-blue-100 rounded-md text-blue-800">
-                                        <p class="font-semibold">Current Electricity Cost:</p>
-                                        <input type="number" id="kwhCost" value="0.13" step="0.01" class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800">
-                                        <p class="text-sm text-blue-700 mt-1">($ per kWh - Avg. US residential is ~0.13)</p>
-                                    </div>
-                                    <div class="mt-4 p-4 bg-green-100 rounded-md text-green-800">
-                                        <p class="font-semibold">Carbon Intensity:</p>
-                                        <input type="number" id="co2PerKwh" value="0.4" step="0.01" class="mt-1 block w-full border border-green-300 rounded-md shadow-sm p-2 focus:ring-green-500 focus:border-green-500 text-gray-800">
-                                        <p class="text-sm text-green-700 mt-1">(kg CO2 per kWh - Avg. US is ~0.4)</p>
-                                    </div>
-                                </div>
-
-                                <div class="mt-8">
-                                    <h3 class="text-xl font-semibold mb-4">Tips for Savings</h3>
-                                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                        <li>Upgrade to Energy Star certified appliances.</li>
-                                        <li>Unplug devices when not in use (phantom load).</li>
-                                        <li>Use natural light and ventilation where possible.</li>
-                                        <li>Consider smart thermostats and lighting.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Placeholder sections for other tools -->
-            <section id="planner" class="py-12 opacity-50">
-                <h2 class="text-2xl font-bold text-gray-500">Green Infrastructure Planner (Coming Soon)</h2>
-            </section>
-            
-            <section id="advisor" class="py-12 opacity-50">
-                <h2 class="text-2xl font-bold text-gray-500">Planting Advisor (Coming Soon)</h2>
-            </section>
-
-            <section id="dashboard" class="py-12 opacity-50">
-                <h2 class="text-2xl font-bold text-gray-500">Urban Energy Dashboard (Coming Soon)</h2>
-            </section>
-
-        </main>
-        
-        <!-- Footer -->
-        <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
-            <div class="container mx-auto max-w-7xl px-4 text-center">
-                <p>&copy; 2025 VerdeView. All rights reserved.</p>
-                <p class="text-sm text-gray-400 mt-2">Design Your Sustainable Future.</p>
-            </div>
-        </footer>
-
-    </section>
 
     <!-- 
       JAVASCRIPT LOGIC
-      This controls the app's behavior.
+      Link to your new external JS file
     -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const splashPage = document.getElementById('splash');
-            const toolsPage = document.getElementById('tools');
-            const getStartedBtn = document.getElementById('getStartedBtn');
-
-            // Handle navigation from Splash to Tools page
-            if (getStartedBtn) {
-                getStartedBtn.addEventListener('click', () => {
-                    // Add a fade-out effect to the splash page
-                    splashPage.classList.add('opacity-0', 'transition-opacity', 'duration-500');
-                    
-                    setTimeout(() => {
-                        // Hide splash page
-                        splashPage.style.display = 'none';
-                        
-                        // Show tools page
-                        toolsPage.style.display = 'block';
-                        // We'll re-trigger the fade-in by removing and adding
-                        toolsPage.classList.remove('animate-fade-in');
-                        void toolsPage.offsetWidth; // Trigger reflow
-                        toolsPage.classList.add('animate-fade-in');
-                    }, 500); // Wait for fade-out to complete
-                });
-            }
-
-            // --- Appliance Analyzer Logic ---
-            const applianceForm = document.getElementById('applianceForm');
-            const applianceList = document.getElementById('applianceList');
-            const calculateTotalBtn = document.getElementById('calculateTotalBtn');
-            const totalEnergySpan = document.getElementById('totalEnergy');
-            const totalCostSpan = document.getElementById('totalCost');
-            const totalCO2Span = document.getElementById('totalCO2');
-            const kwhCostInput = document.getElementById('kwhCost');
-            const co2PerKwhInput = document.getElementById('co2PerKwh');
-
-            let appliances = []; // Store appliance data
-
-            // Function to render appliances in the list
-            function renderAppliances() {
-                applianceList.innerHTML = ''; // Clear current list
-                if (appliances.length === 0) {
-                    applianceList.innerHTML = '<li class="p-3 text-gray-500 text-center">No appliances added yet.</li>';
-                    return;
-                }
-                appliances.forEach((app, index) => {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'flex justify-between items-center p-3 hover:bg-gray-50';
-                    listItem.innerHTML = `
-                        <div>
-                            <p class="text-base font-medium text-gray-900">${app.name}</p>
-                            <p class="text-sm text-gray-500">${app.wattage}W, ${app.hoursPerDay}h/day, ${app.daysPerWeek} days/week</p>
-                        </div>
-                        <button data-index="${index}" class="remove-appliance-btn text-red-600 hover:text-red-800 text-sm font-medium">Remove</button>
-                    `;
-                    applianceList.appendChild(listItem);
-                });
-
-                // Add event listeners to new remove buttons
-                document.querySelectorAll('.remove-appliance-btn').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const index = parseInt(e.target.dataset.index);
-                        appliances.splice(index, 1); // Remove from array
-                        renderAppliances(); // Re-render the list
-                        calculateTotal(); // Recalculate totals
-                    });
-                });
-            }
-
-            // Function to calculate total energy, cost, and CO2
-            function calculateTotal() {
-                let totalAnnualEnergyKWh = 0;
-                const electricityCostPerKwh = parseFloat(kwhCostInput.value) || 0;
-                const co2EmissionsPerKwh = parseFloat(co2PerKwhInput.value) || 0;
-
-                appliances.forEach(app => {
-                    const dailyEnergyWh = app.wattage * app.hoursPerDay;
-                    const weeklyEnergyWh = dailyEnergyWh * app.daysPerWeek;
-                    const annualEnergyWh = weeklyEnergyWh * 52; // Use 52 weeks for a year
-                    totalAnnualEnergyKWh += annualEnergyWh / 1000; // Convert Wh to kWh
-                });
-
-                const totalAnnualCost = totalAnnualEnergyKWh * electricityCostPerKwh;
-                const totalAnnualCO2 = totalAnnualEnergyKWh * co2EmissionsPerKwh;
-
-                totalEnergySpan.textContent = `${totalAnnualEnergyKWh.toFixed(2)} kWh`;
-                totalCostSpan.textContent = `$${totalAnnualCost.toFixed(2)}`;
-                totalCO2Span.textContent = `${totalAnnualCO2.toFixed(2)} kg`;
-            }
-
-            // Add Appliance Form Submission
-            applianceForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('applianceName').value;
-                const wattage = parseFloat(document.getElementById('wattage').value);
-                const hoursPerDay = parseFloat(document.getElementById('hoursPerDay').value);
-                const daysPerWeek = parseFloat(document.getElementById('daysPerWeek').value);
-
-                if (name && !isNaN(wattage) && !isNaN(hoursPerDay) && !isNaN(daysPerWeek) && wattage > 0 && hoursPerDay >= 0 && daysPerWeek >= 0) {
-                    appliances.push({ name, wattage, hoursPerDay, daysPerWeek });
-                    renderAppliances();
-                    calculateTotal();
-                    applianceForm.reset(); // Clear form fields
-                } else {
-                    // We shouldn't use alert(). Let's show a message (silently for now).
-                    console.warn('Invalid appliance data entered.');
-                    // In a real app, we'd show an error message to the user.
-                }
-            });
-
-            // Recalculate on 'Calculate Total' button click
-            calculateTotalBtn.addEventListener('click', calculateTotal);
-
-            // Recalculate when cost/CO2 inputs change
-            kwhCostInput.addEventListener('input', calculateTotal);
-            co2PerKwhInput.addEventListener('input', calculateTotal);
-
-            // Initial render and calculation
-            renderAppliances();
-            calculateTotal();
-
-            // Smooth scrolling for nav links (if any)
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    if (this.hash !== "") {
-                        // Check if the link is for an element on the tools page
-                        const targetElement = document.querySelector(this.hash);
-                        if (targetElement && (toolsPage.contains(targetElement) || splashPage.contains(targetElement))) {
-                            e.preventDefault();
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
-            });
-
-        });
-    </script>
+    <script src="home.js"></script>
 
 </body>
 </html>
