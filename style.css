@@ -103,3 +103,8 @@
     border-width: 1px; /* border */
     border-color: #e5e7eb; /* border-gray-200 */
 }
+
+.gradient
+{
+    background-color: #059669;
+}
