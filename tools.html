@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerdeView Tools</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'fade-up': 'fadeUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+                        fadeUp: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+                    },
+                },
+            },
+        };
+    </script>
+    
+    <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="font-sans bg-gray-100 text-gray-800">
+
+    <section id="tools-menu" class="animate-fade-in min-h-screen flex flex-col">
+        
+        <!-- App Header (Navigation) -->
+        <header class="bg-white shadow-md sticky top-0 z-50">
+            <nav class="container mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
+                <div class="text-2xl font-bold text-emerald-600">
+                    <a href="index.html">Verde<span class="text-gray-700">View</span></a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <span class="text-gray-800 border-b-2 border-emerald-600 font-medium">Tools Menu</span>
+                    <a href="index.html" class="text-gray-500 hover:text-emerald-600">Back to Home</a>
+                </div>
+                <div class="md:hidden">
+                    <a href="index.html" class="text-sm text-emerald-600">Home</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content Area for Tool Cards -->
+        <main class="container mx-auto max-w-5xl p-4 md:p-8 flex-grow">
+            
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2 animate-fade-up">Our Toolkit</h1>
+                <p class="text-lg text-gray-600 animate-fade-up" style="animation-delay: 0.2s;">Select a tool to get started.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Card 1: Appliance Analyzer -->
+                <a href="analyzer.html" class="tool-card animate-fade-up" style="animation-delay: 0.4s;">
+                    <svg class="w-12 h-12 mb-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <h2 class="text-2xl font-bold mb-2">Appliance Analyzer</h2>
+                    <p class="text-gray-600">Calculate energy costs and carbon emissions for your household appliances.</p>
+                </a>
+
+                <!-- Card 2: Planting Advisor -->
+                <a href="advisor.html" class="tool-card animate-fade-up" style="animation-delay: 0.6s;">
+                    <svg class="w-12 h-12 mb-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6-4v4m0-4H7m4 4h3m-6-4v4"></path></svg>
+                    <h2 class="text-2xl font-bold mb-2">Planting Advisor</h2>
+                    <p class="text-gray-600">Get personalized plant recommendations for your space, budget, and sunlight.</p>
+                </a>
+
+                <!-- Card 3: Green Planner (Coming Soon) -->
+                <div class="tool-card-disabled animate-fade-up" style="animation-delay: 0.8s;">
+                    <div class="absolute top-4 right-4 bg-gray-200 text-gray-700 text-xs font-bold px-3 py-1 rounded-full">COMING SOON</div>
+                    <svg class="w-12 h-12 mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m-1 4h1m6-9h1m-1 4h1m-1 4h1"></path></svg>
+                    <h2 class="text-2xl font-bold mb-2 text-gray-500">Green Infrastructure Planner</h2>
+                    <p class="text-gray-400">Visualize green roofs and walls and calculate their potential benefits.</p>
+                </div>
+
+                <!-- Card 4: Urban Dashboard (Coming Soon) -->
+                <div class="tool-card-disabled animate-fade-up" style="animation-delay: 1.0s;">
+                    <div class="absolute top-4 right-4 bg-gray-200 text-gray-700 text-xs font-bold px-3 py-1 rounded-full">COMING SOON</div>
+                    <svg class="w-12 h-12 mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m0 0v-6a2 2 0 00-2-2h-2a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
+                    <h2 class="text-2xl font-bold mb-2 text-gray-500">Urban Energy Dashboard</h2>
+                    <p class="text-gray-400">View city-wide energy data and identify efficiency opportunities.</p>
+                </div>
+
+            </div>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+            <div class="container mx-auto max-w-7xl px-4 text-center">
+                <p>&copy; 2025 VerdeView. All rights reserved.</p>
+                <p class="text-sm text-gray-400 mt-2">Design Your Sustainable Future.</p>
+            </div>
+        </footer>
+
+    </section>
+
+</body>
+</html>
