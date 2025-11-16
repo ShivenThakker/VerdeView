@@ -2,17 +2,27 @@
 
 /* Gradient background animation */
 .gradient-bg {
-    background: linear-gradient(-45deg, #10b981, #06b6d4, #3b82f6, #059669);
+    background: linear-gradient(-45deg, #059669, #10b981, #06b6d4, #3b82f6);
     background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    background-position: 100% 50%;
+    /* Animate once, and stay at the end */
+    animation: gradientBG 5s ease forwards;
+}
+
+/* Static green background (FOR HOME PAGE) */
+.static-gradient-bg {
+    /* Same gradient definition */
+    background: linear-gradient(-45deg, #059669, #10b981, #06b6d4, #3b82f6);
+    background-size: 400% 400%;
+    /* Set statically to the green end position */
+    background-position: 100% 50%;
 }
 
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
-
+    
 /* Styling for the feature cards */
 .feature-card {
     transform-style: preserve-3d;

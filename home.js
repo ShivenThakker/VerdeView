@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 splashPage.classList.remove('hidden');
             }, 500); // Match animation duration
 
-        }, 2000); // Loader delay
+        }, 4500); // Loader delay
 
         // Manual transition from Splash to Tools page
         getStartedBtn.addEventListener('click', () => {
