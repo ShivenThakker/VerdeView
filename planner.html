@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Planner - VerdeView</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'spin': 'spin 1s linear infinite', // For loader
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+                        spin: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Custom styles for the chatbot (already in style.css, but good for isolation) */
+        #chat-window { scroll-behavior: smooth; }
+        #chat-window::-webkit-scrollbar { display: none; }
+        #chat-window { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-sans bg-gray-100 text-gray-800">
+
+    <section id="tools" class="animate-fade-in flex flex-col h-screen">
+        
+        <!-- App Header (Navigation) -->
+        <header class="bg-white shadow-md sticky top-0 z-50">
+            <nav class="container mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
+                <div class="text-2xl font-bold text-emerald-600">
+                    <a href="index.html">Verde<span class="text-gray-700">View</span></a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="tools.html" class="text-gray-500 hover:text-emerald-600">All Tools</a>
+                    <span class="text-emerald-600 border-b-2 border-emerald-600 font-medium">Green Infrastructure Planner</span>
+                </div>
+                <div class="md:hidden">
+                    <a href="tools.html" class="text-sm text-emerald-600">&larr; All Tools</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content Area for Chat -->
+        <main class="flex-1 flex flex-col max-w-4xl w-full mx-auto bg-white shadow-lg rounded-t-lg mt-4 overflow-hidden">
+            
+            <!-- Chat Window -->
+            <div id="chat-window" class="flex-1 p-6 space-y-4 overflow-y-auto">
+                <!-- Chat messages will be injected here by planner.js -->
+            </div>
+
+            <!-- Typing Indicator -->
+            <div id="typing-indicator" class="hidden p-4 px-6 flex items-center space-x-2">
+                <div class="loader"></div>
+                <p class="text-sm text-gray-500">Verde is thinking...</p>
+            </div>
+
+            <!-- Image Thumbnail Preview -->
+            <div id="image-preview-bar" class="hidden p-2 px-6 bg-gray-50 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <img id="preview-thumbnail" src="" class="w-10 h-10 rounded object-cover">
+                        <span id="preview-filename" class="text-sm text-gray-600">image.jpg</span>
+                    </div>
+                    <button id="remove-image-btn" class="text-gray-400 hover:text-red-500">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <form id="chat-form" class="bg-gray-50 p-4 border-t border-gray-200 flex items-center space-x-2">
+                <!-- Hidden file input -->
+                <input type="file" id="file-input" class="hidden" accept="image/*">
+                
+                <!-- Attachment Button -->
+                <label for="file-input" class="p-2 text-gray-500 hover:text-emerald-600 cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.414a4 4 0 00-5.656-5.656l-6.415 6.415a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                </label>
+                
+                <!-- Text Input -->
+                <input type="text" id="chat-input" class="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Ask about green roofs, vertical gardens, or send a photo..." autocomplete="off">
+                
+                <!-- Send Button -->
+                <button type="submit" class="p-3 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </button>
+            </form>
+
+        </main>
+    </section>
+
+    <script src="planner.js"></script>
+</body>
+</html>
