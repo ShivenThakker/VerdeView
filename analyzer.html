@@ -49,6 +49,7 @@
         <!-- Main Content Area for Tools -->
         <main class="container mx-auto max-w-7xl p-4 md:p-8">
             
+            <!-- SECTION 1: MAIN CALCULATOR -->
             <section id="analyzer" class="py-12">
                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
                     <h2 class="text-3xl font-bold text-gray-800 mb-2">Energy-Efficient Appliance Analyzer</h2>
@@ -63,7 +64,7 @@
                                 <form id="applianceForm" class="space-y-4">
                                     <div>
                                         <label for="applianceName" class="block text-sm font-medium text-gray-700">Appliance Name</label>
-                                        <input type="text" id="applianceName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., Refrigerator">
+                                        <input type="text" id="applianceName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., Old Refrigerator">
                                     </div>
                                     <div>
                                         <label for="wattage" class="block text-sm font-medium text-gray-700">Wattage (W)</label>
@@ -77,50 +78,141 @@
                                         <label for="daysPerWeek" class="block text-sm font-medium text-gray-700">Days Used Per Week</label>
                                         <input type="number" id="daysPerWeek" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 7">
                                     </div>
-                                    <button type="submit" class="w-full bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Add Appliance</button>
+                                    <button type="submit" class="w-full bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Add Appliance to List</button>
                                 </form>
 
                                 <div class="mt-6">
                                     <h3 class="text-xl font-semibold mb-4">Added Appliances</h3>
                                     <ul id="applianceList" class="border border-gray-200 rounded-md divide-y divide-gray-200">
                                         <!-- Appliances will be listed here --></ul>
-                                    <button id="calculateTotalBtn" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Calculate Total</button>
+                                    <button id="calculateTotalBtn" type="button" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Calculate Total</D>
                                 </div>
                             </div>
 
                             <!-- Results Display --><div>
-                                <h3 class="text-xl font-semibold mb-4">Your Energy Summary</h3>
+                                <h3 class="text-xl font-semibold mb-4">Your Total Energy Summary</h3>
                                 <div id="results" class="bg-gray-50 p-6 rounded-lg shadow-inner">
                                     <p class="text-lg mb-2"><strong class="text-gray-700">Total Annual Energy:</strong> <span id="totalEnergy" class="font-bold text-emerald-600">0 kWh</span></p>
-                                    <p class="text-lg mb-2"><strong class="text-gray-700">Estimated Annual Cost:</strong> <span id="totalCost" class="font-bold text-emerald-600">$0.00</span></p>
+                                    <p class="text-lg mb-2"><strong class="text-gray-700">Estimated Annual Cost:</strong> <span id="totalCost" class="font-bold text-emerald-600">₹0.00</span></p>
                                     <p class="text-lg mb-2"><strong class="text-gray-700">Estimated Annual CO2:</strong> <span id="totalCO2" class="font-bold text-emerald-600">0 kg</span></p>
                                     
                                     <div class="mt-6 p-4 bg-blue-100 rounded-md text-blue-800">
                                         <p class="font-semibold">Current Electricity Cost:</p>
-                                        <input type="number" id="kwhCost" value="0.13" step="0.01" class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800">
-                                        <p class="text-sm text-blue-700 mt-1">($ per kWh - Avg. US residential is ~0.13)</p>
+                                        <!-- Updated for India -->
+                                        <input type="number" id="kwhCost" value="8.00" step="0.01" class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800">
+                                        <p class="text-sm text-blue-700 mt-1">(₹ per kWh - Avg. Indian residential is ~₹8)</p>
                                     </div>
                                     <div class="mt-4 p-4 bg-green-100 rounded-md text-green-800">
                                         <p class="font-semibold">Carbon Intensity:</p>
-                                        <input type="number" id="co2PerKwh" value="0.4" step="0.01" class="mt-1 block w-full border border-green-300 rounded-md shadow-sm p-2 focus:ring-green-500 focus:border-green-500 text-gray-800">
-                                        <p class="text-sm text-green-700 mt-1">(kg CO2 per kWh - Avg. US is ~0.4)</p>
+                                        <!-- Updated for India -->
+                                        <input type="number" id="co2PerKwh" value="0.75" step="0.01" class="mt-1 block w-full border border-green-300 rounded-md shadow-sm p-2 focus:ring-green-500 focus:border-green-500 text-gray-800">
+                                        <p class="text-sm text-green-700 mt-1">(kg CO2 per kWh - Avg. Indian grid is ~0.75)</p>
                                     </div>
-                                </div>
-
-                                <div class="mt-8">
-                                    <h3 class="text-xl font-semibold mb-4">Tips for Savings</h3>
-                                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                        <li>Upgrade to Energy Star certified appliances.</li>
-                                        <li>Unplug devices when not in use (phantom load).</li>
-                                        <li>Use natural light and ventilation where possible.</li>
-                                        <li>Consider smart thermostats and lighting.</li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <!-- SECTION 2: SAVINGS FINDER TOOL -->
+            <section id="savings-finder" class="py-12">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Savings Finder & Comparison</h2>
+                    <p class="text-gray-600 mb-6">
+                        Compare one of your appliances to an energy-efficient alternative.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Finder Form -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Compare an Appliance</h3>
+                            <form id="finderForm" class="space-y-4">
+                                <div>
+                                    <label for="applianceType" class="block text-sm font-medium text-gray-700">Appliance Type</label>
+                                    <select id="applianceType" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500">
+                                        <option value="">-- Select a type --</option>
+                                        <option value="refrigerator">Refrigerator</option>
+                                        <option value="lightbulb">Light Bulb (Incandescent)</option>
+                                        <option value="ac">Window AC Unit</option>
+                                        <option value="tv">Television (Old)</option>
+                                        <option value="washer">Clothes Washer</option>
+                                        <option value="dryer">Clothes Dryer</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="finderWattage" class="block text-sm font-medium text-gray-700">Your Appliance's Wattage (W)</label>
+                                    <input type="number" id="finderWattage" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 150">
+                                </div>
+                                <div>
+                                    <!-- Label text will be changed by JS -->
+                                    <label id="finderHoursLabel" for="finderHoursPerDay" class="block text-sm font-medium text-gray-700">Hours Used Per Day</label>
+                                    <input type="number" id="finderHoursPerDay" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 8">
+                                </div>
+                                <div>
+                                    <!-- Label text will be changed by JS -->
+                                    <label id="finderDaysLabel" for="finderDaysPerWeek" class="block text-sm font-medium text-gray-700">Days Used Per Week</label>
+                                    <input type="number" id="finderDaysPerWeek" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 7">
+                                </div>
+                                <button type="submit" class="w-full bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Calculate Savings</button>
+                            </form>
+                        </div>
+
+                        <!-- Finder Results -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Comparison Result</h3>
+                            <div id="finderResults" class="bg-gray-50 p-6 rounded-lg shadow-inner min-h-[350px]">
+                                <p id="finderPlaceholder" class="text-gray-500 text-center pt-12">Your comparison will appear here...</p>
+                                
+                                <div id="comparisonContent" class="hidden">
+                                    <!-- Side-by-side comparison -->
+                                    <div class.grid grid-cols-2 gap-4 mb-6">
+                                        <!-- Your Appliance -->
+                                        <div>
+                                            <h4 class="text-lg font-bold text-gray-700">Your Appliance</h4>
+                                            <p id="yourApplianceName" class="text-sm text-gray-500">150W Refrigerator</p>
+                                            <p class="text-lg font-semibold text-gray-800" id="yourAnnualCost">₹0.00 / year</p>
+                                            <p class="text-sm text-gray-500" id="yourAnnualKWh">0 kWh / year</p>
+                                        </div>
+                                        <!-- Efficient Appliance -->
+                                        <div class="mt-4">
+                                            <h4 class="text-lg font-bold text-emerald-600">Efficient Alternative</h4>
+                                            <p id="efficientApplianceName" class="text-sm text-gray-500">50W ENERGY STAR Fridge</p>
+                                            <p class="text-lg font-semibold text-emerald-700" id="efficientAnnualCost">₹0.00 / year</p>
+                                            <p class="text-sm text-gray-500" id="efficientAnnualKWh">0 kWh / year</p>
+                                            <!-- New Link -->
+                                            <a href="#" id="efficientLink" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-emerald-600 hover:text-emerald-800 transition duration-300 block mt-2">
+                                                Find this product &rarr;
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Potential Savings -->
+                                    <div class="bg-emerald-100 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-md">
+                                        <h4 class="text-xl font-bold">Potential Annual Savings!</h4>
+                                        <p class="text-2xl font-bold mt-2" id="savingsCost">₹0.00</p>
+                                        <p class="mt-1" id="savingsKWh">You could save <strong>0 kWh</strong> and <strong>0 kg of CO₂</strong> per year.</p>
+                                    </div>
+
+                                    <!-- New "Shop" Link -->
+                                    <div class="mt-4 text-center">
+                                        <a href="#" id="efficientLink" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-emerald-600 hover:text-emerald-800">
+                                            <!-- This text will be set by JS -->
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div id="finderError" class="hidden text-center pt-12 text-red-600">
+                                    <p>Sorry, we don't have an alternative for that appliance type yet. Please try another.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
         </main>
         
         <!-- Footer -->
