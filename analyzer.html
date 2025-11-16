@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appliance Analyzer - VerdeView</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-sans bg-gray-100 text-gray-800">
+
+    <section id="tools" class="animate-fade-in">
+        
+        <!-- App Header (Navigation) -->
+        <header class="bg-white shadow-md sticky top-0 z-50">
+            <nav class="container mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
+                <div class="text-2xl font-bold text-emerald-600">
+                    <a href="index.html">Verde<span class="text-gray-700">View</span></a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="tools.html" class="text-gray-500 hover:text-emerald-600">All Tools</a>
+                    <span class="text-emerald-600 border-b-2 border-emerald-600 font-medium">Appliance Analyzer</span>
+                </div>
+                <div class="md:hidden">
+                    <a href="tools.html" class="text-sm text-emerald-600">&larr; All Tools</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content Area for Tools -->
+        <main class="container mx-auto max-w-7xl p-4 md:p-8">
+            
+            <section id="analyzer" class="py-12">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Energy-Efficient Appliance Analyzer</h2>
+                    <p class="text-gray-600 mb-6">
+                        Log your appliances to find your energy hogs and see potential savings.
+                    </p>
+                    
+                    <div id="analyzer-app-container">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Input Form --><div>
+                                <h3 class="text-xl font-semibold mb-4">Your Appliances</h3>
+                                <form id="applianceForm" class="space-y-4">
+                                    <div>
+                                        <label for="applianceName" class="block text-sm font-medium text-gray-700">Appliance Name</label>
+                                        <input type="text" id="applianceName" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., Refrigerator">
+                                    </div>
+                                    <div>
+                                        <label for="wattage" class="block text-sm font-medium text-gray-700">Wattage (W)</label>
+                                        <input type="number" id="wattage" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 150">
+                                    </div>
+                                    <div>
+                                        <label for="hoursPerDay" class="block text-sm font-medium text-gray-700">Hours Used Per Day</label>
+                                        <input type="number" id="hoursPerDay" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 8">
+                                    </div>
+                                    <div>
+                                        <label for="daysPerWeek" class="block text-sm font-medium text-gray-700">Days Used Per Week</label>
+                                        <input type="number" id="daysPerWeek" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="e.g., 7">
+                                    </div>
+                                    <button type="submit" class="w-full bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Add Appliance</button>
+                                </form>
+
+                                <div class="mt-6">
+                                    <h3 class="text-xl font-semibold mb-4">Added Appliances</h3>
+                                    <ul id="applianceList" class="border border-gray-200 rounded-md divide-y divide-gray-200">
+                                        <!-- Appliances will be listed here --></ul>
+                                    <button id="calculateTotalBtn" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Calculate Total</button>
+                                </div>
+                            </div>
+
+                            <!-- Results Display --><div>
+                                <h3 class="text-xl font-semibold mb-4">Your Energy Summary</h3>
+                                <div id="results" class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                                    <p class="text-lg mb-2"><strong class="text-gray-700">Total Annual Energy:</strong> <span id="totalEnergy" class="font-bold text-emerald-600">0 kWh</span></p>
+                                    <p class="text-lg mb-2"><strong class="text-gray-700">Estimated Annual Cost:</strong> <span id="totalCost" class="font-bold text-emerald-600">$0.00</span></p>
+                                    <p class="text-lg mb-2"><strong class="text-gray-700">Estimated Annual CO2:</strong> <span id="totalCO2" class="font-bold text-emerald-600">0 kg</span></p>
+                                    
+                                    <div class="mt-6 p-4 bg-blue-100 rounded-md text-blue-800">
+                                        <p class="font-semibold">Current Electricity Cost:</p>
+                                        <input type="number" id="kwhCost" value="0.13" step="0.01" class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800">
+                                        <p class="text-sm text-blue-700 mt-1">($ per kWh - Avg. US residential is ~0.13)</p>
+                                    </div>
+                                    <div class="mt-4 p-4 bg-green-100 rounded-md text-green-800">
+                                        <p class="font-semibold">Carbon Intensity:</p>
+                                        <input type="number" id="co2PerKwh" value="0.4" step="0.01" class="mt-1 block w-full border border-green-300 rounded-md shadow-sm p-2 focus:ring-green-500 focus:border-green-500 text-gray-800">
+                                        <p class="text-sm text-green-700 mt-1">(kg CO2 per kWh - Avg. US is ~0.4)</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-8">
+                                    <h3 class="text-xl font-semibold mb-4">Tips for Savings</h3>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                        <li>Upgrade to Energy Star certified appliances.</li>
+                                        <li>Unplug devices when not in use (phantom load).</li>
+                                        <li>Use natural light and ventilation where possible.</li>
+                                        <li>Consider smart thermostats and lighting.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+            <div class="container mx-auto max-w-7xl px-4 text-center">
+                <p>&copy; 2025 VerdeView. All rights reserved.</p>
+                <p class="text-sm text-gray-400 mt-2">Design Your Sustainable Future.</p>
+            </div>
+        </footer>
+    </section>
+
+    <script src="analyzer.js"></script>
+</body>
+</html>
